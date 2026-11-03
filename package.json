@@ -1,0 +1,92 @@
+{
+  "name": "abap-webgui",
+  "displayName": "ABAP WebGUI for ADT",
+  "description": "Adds 'ABAP: Open Webgui' to ABAP Development Tools for VS Code: opens SAP WebGUI (optionally a program or transaction) in VS Code's Simple Browser.",
+  "version": "0.1.0",
+  "publisher": "uwefetzer",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uwefetzer/vscode-abap-webgui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uwefetzer/vscode-abap-webgui/issues"
+  },
+  "homepage": "https://github.com/uwefetzer/vscode-abap-webgui#readme",
+  "engines": {
+    "vscode": "^1.109.5"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "abap",
+    "sap",
+    "webgui",
+    "adt",
+    "sap gui"
+  ],
+  "extensionDependencies": [
+    "sapse.adt-vscode"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "abap.openWebgui",
+        "title": "Open Webgui",
+        "category": "ABAP"
+      }
+    ],
+    "configuration": {
+      "title": "ABAP WebGUI",
+      "properties": {
+        "abapWebgui.defaultProtocol": {
+          "type": "string",
+          "enum": [
+            "https",
+            "http"
+          ],
+          "default": "https",
+          "description": "Protocol used to propose a WebGUI address for destinations that do not have a configured entry in 'abapWebgui.systems'."
+        },
+        "abapWebgui.systems": {
+          "type": "object",
+          "default": {},
+          "markdownDescription": "WebGUI address per ADT destination id, for example `\"A4H_001_DEVELOPER_EN\": \"https://host.example.com:44300\"`. Missing entries are proposed once and then saved here.",
+          "additionalProperties": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "abapWebgui.destinationsFile": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the ADT `destinations.json`. Leave empty to use `~/.adtls/destinations.json`."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run typecheck && node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "package": "npm run typecheck && node esbuild.mjs --production",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "node --test src/**/*.test.ts",
+    "vsix": "vsce package"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.109.0",
+    "@vscode/vsce": "^3.7.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.39.0",
+    "typescript": "~5.9.0",
+    "typescript-eslint": "^8.46.0"
+  }
+}
