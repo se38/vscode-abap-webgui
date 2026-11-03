@@ -28,16 +28,9 @@ ADT has no public API for other extensions, so this extension:
 - cannot reuse ADT's session or object search, so the program or transaction name is typed in.
 
 The WebGUI server is taken from the `webGuiServer` property you add to a destination in `destinations.json`, e.g. `"webGuiServer": "https://se38-black-2:44300"`.
+If you want to overwrite the SAML2 settings, add a new field into the `destination.json`, for example `"webGuiSaml2": "disabled",`
 
 Otherwise (RFC destinations contain no HTTP port) the first time you use a destination you are asked for the WebGUI address (a proposal is made from the application server and the standard ICM ports `80<nn>`/`443<nn>`); it is saved to `abapWebgui.systems`. SAProuter strings are not usable by a browser, so use the address your network exposes.
-
-## Settings
-
-| Setting | Description |
-| --- | --- |
-| `abapWebgui.systems` | Destination id → WebGUI address, e.g. `"A4H_001_DEVELOPER_EN": "https://host:44300"` |
-| `abapWebgui.defaultProtocol` | `https` (default) or `http`, used for proposals |
-| `abapWebgui.destinationsFile` | Override path of ADT's `destinations.json` |
 
 ## Development
 
